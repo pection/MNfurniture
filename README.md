@@ -16,8 +16,4 @@ soruce /env/bin/activate
 
 This repositories just example for more details ask [Mike](https://wwww.facebook.com/pections).
 
-`django-admin startapp yourproject`
 
-`python manage.py migrate`
-
-`python manage.py makemigrate`
