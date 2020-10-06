@@ -2,7 +2,7 @@
 
 # Mike Create Application for MN-furniture and Web-Scraper
 
-Python 3.8 in Program python Guibill
+Python 3.8 in Program for create Guibill with python
 ```
 pip install virtualenv
 pip install virtualwrapper
