@@ -8,7 +8,7 @@ pip install virtualenv
 pip install virtualwrapper
 virtualenv env
 source env/bin/activate
-pip install -r requierment.txt
+pip install -r requirements.txt
 ```
 ```markdown
 Python Program_python\Guibill\Guibill_run.py
