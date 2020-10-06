@@ -3,11 +3,13 @@
 # Mike Create Application for MN-furniture and Web-Scraper
 
 Python 3.8 in Program python Guibill
-
+`pip install virtualenv`
+`virtualenv env`
+`source env/bin/activate`
 `pip install -r requierment.txt`
 ```markdown
-Python Guibill\Guibill.py
-Python Program_python\AddPaid.py
+Python Program_python\Guibill\Guibill_run.py
+Python Program_python\Addwatermark\AddPaid.py
 
 
 Python 3.8 in Image-Scraper
