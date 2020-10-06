@@ -1,4 +1,4 @@
-opencv-python==3.5.0
+opencv-python==3.4.11.43
 PySimpleGUI==4.29.0
 Pillow==7.0
 tldextract==2.2.3
