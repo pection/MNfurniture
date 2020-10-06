@@ -3,10 +3,13 @@
 # Mike Create Application for MN-furniture and Web-Scraper
 
 Python 3.8 in Program python Guibill
-`pip install virtualenv`
-`virtualenv env`
-`source env/bin/activate`
-`pip install -r requierment.txt`
+```
+pip install virtualenv
+pip install virtualwrapper
+virtualenv env
+source env/bin/activate
+pip install -r requierment.txt
+```
 ```markdown
 Python Program_python\Guibill\Guibill_run.py
 Python Program_python\Addwatermark\AddPaid.py
@@ -51,8 +54,10 @@ You can read more on how this scraper was built here <https://www.scrapehero.com
 ```
 Python 3.8 , Django2.0 in mn_ecommerce
 
-`cd mn_ecommerce'
-`pip install -r requierment.txt`
+```
+cd mn_ecommerce
+pip install -r requierment.txt
+```
 
 ```markdown
 pip install django
