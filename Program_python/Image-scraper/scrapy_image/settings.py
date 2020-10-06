@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for scrapy_alibaba project
+# Scrapy settings for scrapy_image project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,14 +9,14 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'scrapy_alibaba'
+BOT_NAME = 'scrapy_image'
 
-SPIDER_MODULES = ['scrapy_alibaba.spiders']
-NEWSPIDER_MODULE = 'scrapy_alibaba.spiders'
+SPIDER_MODULES = ['scrapy_image.spiders']
+NEWSPIDER_MODULE = 'scrapy_image.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'scrapy_alibaba (+http://www.yourdomain.com)'
+#USER_AGENT = 'scrapy_image (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -56,27 +56,27 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
-#SPIDER_MIDDLEWARES = {
-#    'scrapy_alibaba.middlewares.ScrapyAlibabaSpiderMiddleware': 543,
-#}
+# SPIDER_MIDDLEWARES = {
+#    'scrapy_image.middlewares.ScrapyAlibabaSpiderMiddleware': 543,
+# }
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'scrapy_alibaba.middlewares.ScrapyAlibabaDownloaderMiddleware': 543,
-#}
+# DOWNLOADER_MIDDLEWARES = {
+#    'scrapy_image.middlewares.ScrapyAlibabaDownloaderMiddleware': 543,
+# }
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
-#EXTENSIONS = {
+# EXTENSIONS = {
 #    'scrapy.extensions.telnet.TelnetConsole': None,
-#}
+# }
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'scrapy_alibaba.pipelines.ScrapyAlibabaPipeline': 300,
-#}
+# ITEM_PIPELINES = {
+#    'scrapy_image.pipelines.ScrapyAlibabaPipeline': 300,
+# }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html

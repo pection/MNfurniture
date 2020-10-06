@@ -7,6 +7,12 @@ import tldextract
 import subprocess
 import platform
 import argparse
+import yaml
+
+config_vals = ""
+with open("Program_python/Guibill/config.yaml", "r") as cr:
+   config_vals = yaml.load(cr)
+
 def open_file(path):
     if platform.system() == "Windows":
         os.startfile(path)
@@ -18,7 +24,7 @@ def CreateGuibill():
     Data_template = ['PhotoPath', 'Name', 'Phone', 'Address', 'Order',
                      'Delivery', 'Delivery2', 'Price', 'Value', 'Discount', 'Deposit']
     watermark = Image.open(
-        '../Bill/Template/PAID.png')
+        'Bill/Template/PAID.png')
 
     sg.theme('DarkAmber')
     x_offset = 100
@@ -36,35 +42,35 @@ def CreateGuibill():
     Data = dict(zip(Data_template, listofvalues))
 
     if(len(Data["PhotoPath"])) < 5:
-        Data["PhotoPath"] = "../Bill/Template/48848.jpg"
+        Data["PhotoPath"] = config_vals["PhotoPath"]
     if(len(Data["Discount"])) < 5:
-        Data["Discount"] = "0"
+        Data["Discount"] = config_vals["Discount"]
     if(len(Data["Phone"])) < 5:
-        Data["Phone"] = "xxx-xxx-xxxx"
+        Data["Phone"] = config_vals["Phone"]
     if(len(Data["Name"])) < 5:
-        Data["Name"] = "xxx"
+        Data["Name"] = config_vals["Name"]
     if(len(Data["Value"])) < 1:
-        Data["Value"] = "1"
+        Data["Value"] =config_vals["Value"]
     if(len(Data["Price"])) < 1:
-        Data["Price"] = "0"
+        Data["Price"] =config_vals["Price"]
     if(len(Data["Deposit"])) <1:
-        Data["Deposit"] = "0"
+        Data["Deposit"] = config_vals["Deposit"]
     imgdefault = cv2.imread(Data["PhotoPath"])
     img = resize(image=imgdefault, width=200, height=200)
 
     template = cv2.imread(
-        "../Bill/Template/TemplateBill.jpg")
+        "Bill/Template/TemplateBill.jpg")
     template[y_offset:y_offset + img.shape[0],
              x_offset:x_offset + img.shape[1]] = img
 
     cv2.imwrite(
-        "../Bill/PretoPaid/Pretopaid.jpg", template)
+        "Bill/PretoPaid/Pretopaid.jpg", template)
     image = Image.open(
-        "../Bill/PretoPaid/Pretopaid.jpg")
+        "Bill/PretoPaid/Pretopaid.jpg")
     draw = ImageDraw.Draw(image)
 
-    font = ImageFont.truetype("../static/Fonts/Arial Unicode.ttf", 13)
-    font2 = ImageFont.truetype("../static/Fonts/Arial Unicode.ttf", 11)
+    font = ImageFont.truetype("static/Fonts/Arial Unicode.ttf", 13)
+    font2 = ImageFont.truetype("static/Fonts/Arial Unicode.ttf", 11)
     Summaryvalue = (int((Data["Price"])) *
                     int((Data["Value"]))) - int((Data["Discount"]))
     RemainValue = Summaryvalue - int((Data["Deposit"]))
@@ -105,9 +111,9 @@ def CreateGuibill():
     image2.paste(watermark, (int((img_w - watermarkW) / 2),
                              int((img_h - watermarkH) / 2)), watermark)
     image.save(
-        "../Bill/PretoPaid/Pretopaid2.jpg")
+        "Bill/PretoPaid/Pretopaid2.jpg")
     image2.save(
-        "../Bill/PretoPaid/Pretopaid2_paid.jpg")
+        "Bill/PretoPaid/Pretopaid2_paid.jpg")
 
 
 def main():
@@ -119,4 +125,4 @@ if __name__ == '__main__':
     statefolder = results.open
     main()
     if statefolder != 0:
-        open_file("../Bill/PretoPaid/")
+        open_file("Bill/PretoPaid/")
