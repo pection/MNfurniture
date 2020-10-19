@@ -1,14 +1,15 @@
 import PySimpleGUI as sg
+import cv2
 from creategui import changedicttolist, CreateTablegui, Data_template
 from resizefill import resize, xyaxis
-import cv2
 from PIL import ImageFont, ImageDraw, Image
 import tldextract
 import subprocess
 import platform
 import argparse
 import yaml
-
+import imutils 
+import datetime
 config_vals = ""
 with open("Program_python/Guibill/config.yaml", "r") as cr:
    config_vals = yaml.load(cr)
@@ -21,11 +22,9 @@ def open_file(path):
     else:
         subprocess.Popen(["xdg-open", path])
 def CreateGuibill():
-    Data_template = ['PhotoPath', 'Name', 'Phone', 'Address', 'Order',
-                     'Delivery', 'Delivery2', 'Price', 'Value', 'Discount', 'Deposit']
-    watermark = Image.open(
-        'Bill/Template/PAID.png')
-
+    Data_template = ['PhotoPath', 'Name', 'Phone', 'Address', 'Order','Delivery', 'Delivery2', 'Price', 'Value', 'Discount', 'Deposit','Detail']
+    watermark = Image.open('Bill/Template/PAID.png')
+    Current_Date_Formatted = datetime.datetime.today().strftime('%d/%m/%Y')
     sg.theme('DarkAmber')
     x_offset = 100
     y_offset = 350
@@ -34,13 +33,11 @@ def CreateGuibill():
     # Event Loop to process "events" and get the "values" of the inputs
     while True:
         event, values = window.read()
-    #    window.Element('_LISTBOX_').Update(values=Datatemplate)
-        if event == sg.WIN_CLOSED or event == 'Cancel' or event == 'Ok':  # if user closes window or clicks cancel
+        if event == sg.WIN_CLOSED or event == 'Cancel' or event == 'Ok':
             window.close()
             break
     listofvalues = changedicttolist(values)
     Data = dict(zip(Data_template, listofvalues))
-
     if(len(Data["PhotoPath"])) < 5:
         Data["PhotoPath"] = config_vals["PhotoPath"]
     if(len(Data["Discount"])) < 5:
@@ -48,15 +45,24 @@ def CreateGuibill():
     if(len(Data["Phone"])) < 5:
         Data["Phone"] = config_vals["Phone"]
     if(len(Data["Name"])) < 5:
-        Data["Name"] = config_vals["Name"]
+            Data["Name"] = config_vals["Name"]
     if(len(Data["Value"])) < 1:
         Data["Value"] =config_vals["Value"]
-    if(len(Data["Price"])) < 1:
-        Data["Price"] =config_vals["Price"]
-    if(len(Data["Deposit"])) <1:
-        Data["Deposit"] = config_vals["Deposit"]
+        if(len(Data["Price"])) < 1:
+            Data["Price"] =config_vals["Price"]
+        if(len(Data["Deposit"])) <1:
+            Data["Deposit"] = config_vals["Deposit"]
+    if(len(Data["Order"]))<1:
+        Data["Order"] = Current_Date_Formatted
+    if(len(Data["Delivery"])==1):
+        if(Data["Delivery"])=='1':
+            Data["Delivery"]= (datetime.datetime.today()+datetime.timedelta(days=10)).strftime('%d/%m/%Y')
+            Data["Delivery2"]=(datetime.datetime.today()+datetime.timedelta(days=14)).strftime('%d/%m/%Y')
+    if(len(Data["Detail"])<1):
+        Data["Detail"]=''
+   
     imgdefault = cv2.imread(Data["PhotoPath"])
-    img = resize(image=imgdefault, width=200, height=200)
+    img = imutils.resize(image=imgdefault, height=200)
 
     template = cv2.imread(
         "Bill/Template/TemplateBill.jpg")
@@ -102,7 +108,7 @@ def CreateGuibill():
 
     draw.text((xyaxis["x_remain"], xyaxis["y_remain"]),
               str(RemainValue), font=font, fill=(0, 0, 0, 0))
-
+    draw.text((100,600),Data["Detail"],font=font,fill=(0,0,0,0))
     image2 = image.copy()
     img_w = image2.width
     img_h = image2.height
