@@ -11,10 +11,16 @@ import yaml
 import imutils
 import datetime
 import os
-
+import re
 config_vals = ""
-file_path=os.getcwd().split(os.sep)
-mn_funitures_path=file_path[1]+file_path[2]+file_path[3]
+file_path=os.getcwd()
+pattern=['mnfurniture','MNfurniture']
+mn_funitures_pathindex=[match.start() for match in re.finditer(pattern[0],file_path)]
+if mn_funitures_pathindex == []:
+    mn_funitures_pathindex=[match.start() for match in re.finditer(pattern[1],file_path)]
+print (mn_funitures_pathindex)
+mn_funitures_path=file_path[:mn_funitures_pathindex[0]+11]+"/"
+print(mn_funitures_path)
 with open(mn_funitures_path+"Program_python/Guibill/config.yaml", "r") as cr:
    config_vals = yaml.load(cr)
 
