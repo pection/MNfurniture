@@ -5,15 +5,13 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('core', '0004_auto_20200412_1510'),
-    ]
+    dependencies = [("core", "0004_auto_20200412_1510")]
 
     operations = [
         migrations.AddField(
-            model_name='item',
-            name='stock_no',
+            model_name="item",
+            name="stock_no",
             field=models.CharField(default=1, max_length=10),
             preserve_default=False,
-        ),
+        )
     ]

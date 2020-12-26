@@ -3,8 +3,8 @@ import argparse
 import tldextract
 
 broken_images = []
-image_urls=[]
-templateimg=cv2.imread('/Users/pection/Documents/mn_furniture/Bill/TemplateBill.jpg')
+image_urls = []
+templateimg = cv2.imread("/Users/pection/Documents/mn_furniture/Bill/TemplateBill.jpg")
 # parser = argparse.ArgumentParser(description='This is Resize image  script')
 # parser.add_argument('-i','--in',action='store',dest='input',default=None,help='<Required>image path',required=True)
 # parser.add_argument('-o','--out',action='store',dest='output',default=None,help='<Required>image path',required=True)
@@ -15,7 +15,7 @@ templateimg=cv2.imread('/Users/pection/Documents/mn_furniture/Bill/TemplateBill.
 # savepath= results.output
 # width_image=results.width
 # height_image=results.height
-def resize(image, width = None, height = None, inter = cv2.INTER_AREA):
+def resize(image, width=None, height=None, inter=cv2.INTER_AREA):
     # initialize the dimensions of the image to be resized and grab the image size
     dim = None
     (h, w) = image.shape[:2]
@@ -33,9 +33,10 @@ def resize(image, width = None, height = None, inter = cv2.INTER_AREA):
         r = width / float(w)
         dim = (width, int(h * r))
     # resize the image
-    resized = cv2.resize(image, dim, interpolation = inter)
+    resized = cv2.resize(image, dim, interpolation=inter)
     # return the resized image
     return resized
+
 
 print(templateimg.shape[:2])
 # imgdefault=cv2.imread(imgpath,-1)

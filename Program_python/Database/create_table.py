@@ -1,7 +1,7 @@
 
 import sqlite3 as lite
 
-con = lite.connect('test.db')
+con = lite.connect("test.db")
 
 with con:
 

@@ -5,19 +5,15 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('core', '0003_auto_20200412_1441'),
-    ]
+    dependencies = [("core", "0003_auto_20200412_1441")]
 
     operations = [
         migrations.RenameField(
-            model_name='item',
-            old_name='description',
-            new_name='description_long',
+            model_name="item", old_name="description", new_name="description_long"
         ),
         migrations.AddField(
-            model_name='item',
-            name='description_short',
+            model_name="item",
+            name="description_short",
             field=models.CharField(default=1, max_length=50),
             preserve_default=False,
         ),

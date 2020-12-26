@@ -5,20 +5,26 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('core', '0005_item_stock_no'),
-    ]
+    dependencies = [("core", "0005_item_stock_no")]
 
     operations = [
         migrations.CreateModel(
-            name='Slide',
+            name="Slide",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('caption1', models.CharField(max_length=100)),
-                ('caption2', models.CharField(max_length=100)),
-                ('link', models.CharField(max_length=100)),
-                ('image', models.ImageField(upload_to='')),
-                ('is_active', models.BooleanField(default=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("caption1", models.CharField(max_length=100)),
+                ("caption2", models.CharField(max_length=100)),
+                ("link", models.CharField(max_length=100)),
+                ("image", models.ImageField(upload_to="")),
+                ("is_active", models.BooleanField(default=True)),
             ],
-        ),
+        )
     ]

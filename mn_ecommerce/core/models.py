@@ -6,22 +6,15 @@ from django_countries.fields import CountryField
 
 # Create your models here.
 CATEGORY_CHOICES = (
-    ('SB', 'Shirts And Blouses'),
-    ('TS', 'T-Shirts'),
-    ('SK', 'Skirts'),
-    ('HS', 'Hoodies&Sweatshirts')
+    ("SB", "Shirts And Blouses"),
+    ("TS", "T-Shirts"),
+    ("SK", "Skirts"),
+    ("HS", "Hoodies&Sweatshirts"),
 )
 
-LABEL_CHOICES = (
-    ('S', 'sale'),
-    ('N', 'new'),
-    ('P', 'promotion')
-)
+LABEL_CHOICES = (("S", "sale"), ("N", "new"), ("P", "promotion"))
 
-ADDRESS_CHOICES = (
-    ('B', 'Billing'),
-    ('S', 'Shipping'),
-)
+ADDRESS_CHOICES = (("B", "Billing"), ("S", "Shipping"))
 
 
 class Slide(models.Model):
@@ -34,6 +27,7 @@ class Slide(models.Model):
     def __str__(self):
         return "{} - {}".format(self.caption1, self.caption2)
 
+
 class Category(models.Model):
     title = models.CharField(max_length=100)
     slug = models.SlugField()
@@ -45,9 +39,7 @@ class Category(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("core:category", kwargs={
-            'slug': self.slug
-        })
+        return reverse("core:category", kwargs={"slug": self.slug})
 
 
 class Item(models.Model):
@@ -67,24 +59,17 @@ class Item(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("core:product", kwargs={
-            'slug': self.slug
-        })
+        return reverse("core:product", kwargs={"slug": self.slug})
 
     def get_add_to_cart_url(self):
-        return reverse("core:add-to-cart", kwargs={
-            'slug': self.slug
-        })
+        return reverse("core:add-to-cart", kwargs={"slug": self.slug})
 
     def get_remove_from_cart_url(self):
-        return reverse("core:remove-from-cart", kwargs={
-            'slug': self.slug
-        })
+        return reverse("core:remove-from-cart", kwargs={"slug": self.slug})
 
 
 class OrderItem(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     ordered = models.BooleanField(default=False)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
@@ -108,27 +93,38 @@ class OrderItem(models.Model):
 
 
 class Order(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     ref_code = models.CharField(max_length=20)
     items = models.ManyToManyField(OrderItem)
     start_date = models.DateTimeField(auto_now_add=True)
     ordered_date = models.DateTimeField()
     ordered = models.BooleanField(default=False)
     shipping_address = models.ForeignKey(
-        'BillingAddress', related_name='shipping_address', on_delete=models.SET_NULL, blank=True, null=True)
+        "BillingAddress",
+        related_name="shipping_address",
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+    )
     billing_address = models.ForeignKey(
-        'BillingAddress', related_name='billing_address', on_delete=models.SET_NULL, blank=True, null=True)
+        "BillingAddress",
+        related_name="billing_address",
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+    )
     payment = models.ForeignKey(
-        'Payment', on_delete=models.SET_NULL, blank=True, null=True)
+        "Payment", on_delete=models.SET_NULL, blank=True, null=True
+    )
     coupon = models.ForeignKey(
-        'Coupon', on_delete=models.SET_NULL, blank=True, null=True)
+        "Coupon", on_delete=models.SET_NULL, blank=True, null=True
+    )
     being_delivered = models.BooleanField(default=False)
     received = models.BooleanField(default=False)
     refund_requested = models.BooleanField(default=False)
     refund_granted = models.BooleanField(default=False)
 
-    '''
+    """
     1. Item added to cart
     2. Adding a BillingAddress
     (Failed Checkout)
@@ -136,7 +132,7 @@ class Order(models.Model):
     4. Being delivered
     5. Received
     6. Refunds
-    '''
+    """
 
     def __str__(self):
         return self.user.username
@@ -151,8 +147,7 @@ class Order(models.Model):
 
 
 class BillingAddress(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     street_address = models.CharField(max_length=100)
     apartment_address = models.CharField(max_length=100)
     country = CountryField(multiple=False)
@@ -164,13 +159,14 @@ class BillingAddress(models.Model):
         return self.user.username
 
     class Meta:
-        verbose_name_plural = 'BillingAddresses'
+        verbose_name_plural = "BillingAddresses"
 
 
 class Payment(models.Model):
     stripe_charge_id = models.CharField(max_length=50)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             on_delete=models.SET_NULL, blank=True, null=True)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True
+    )
     amount = models.FloatField()
     timestamp = models.DateTimeField(auto_now_add=True)
 

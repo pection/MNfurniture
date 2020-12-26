@@ -6,34 +6,39 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('core', '0002_auto_20191105_0426'),
-    ]
+    dependencies = [("core", "0002_auto_20191105_0426")]
 
     operations = [
         migrations.CreateModel(
-            name='Category',
+            name="Category",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=100)),
-                ('slug', models.SlugField()),
-                ('description', models.TextField()),
-                ('image', models.ImageField(upload_to='')),
-                ('is_active', models.BooleanField(default=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=100)),
+                ("slug", models.SlugField()),
+                ("description", models.TextField()),
+                ("image", models.ImageField(upload_to="")),
+                ("is_active", models.BooleanField(default=True)),
             ],
         ),
         migrations.AlterModelOptions(
-            name='billingaddress',
-            options={'verbose_name_plural': 'BillingAddresses'},
+            name="billingaddress", options={"verbose_name_plural": "BillingAddresses"}
         ),
         migrations.AddField(
-            model_name='item',
-            name='is_active',
-            field=models.BooleanField(default=True),
+            model_name="item", name="is_active", field=models.BooleanField(default=True)
         ),
         migrations.AlterField(
-            model_name='item',
-            name='category',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='core.Category'),
+            model_name="item",
+            name="category",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="core.Category"
+            ),
         ),
     ]

@@ -1,6 +1,6 @@
 import sqlite3 as lite
 
-con = lite.connect('test.db')
+con = lite.connect("test.db")
 
 with con:
 
@@ -10,5 +10,4 @@ with con:
     rows = cur.fetchall()
 
     for row in rows:
-        print (row)
-
+        print(row)

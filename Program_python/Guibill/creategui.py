@@ -1,21 +1,38 @@
 import PySimpleGUI as sg
 
-sg.theme('DarkAmber')   # Add a touch of color
+sg.theme("DarkAmber")  # Add a touch of color
 
 
 # All the stuff inside your window.
-Data_template=['PhotoPath','Name','Phone','Address','Order','Delivery','Price','Value','Discount','Deposit','Remain']
+Data_template = [
+    "PhotoPath",
+    "Name",
+    "Phone",
+    "Address",
+    "Order",
+    "Delivery",
+    "Price",
+    "Value",
+    "Discount",
+    "Deposit",
+    "Remain",
+]
+
+
 def CreateTablegui(Datatemplate):
     layoutdata = []
     for i in range(len(Datatemplate)):
         layoutdata.append([sg.Text(Datatemplate[i]), sg.InputText()])
-    layoutdata.append([sg.Button('Ok'), sg.Button('Cancel')])
+    layoutdata.append([sg.Button("Ok"), sg.Button("Cancel")])
     return layoutdata
+
+
 def changedicttolist(listofdict):
-    listvalues=[]
+    listvalues = []
     for valuefrombill in listofdict.values():
         listvalues.append(valuefrombill)
     return listvalues
+
 
 # layout=CreateTablegui(Data_template)
 # window = sg.Window('Billing Address',layout)
