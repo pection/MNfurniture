@@ -108,7 +108,7 @@ def CreateGuibill():
             ).strftime("%d/%m/%Y")
     if len(Data["Detail"]) < 1:
         Data["Detail"] = ""
-    with open('mystorage.txt', 'w') as f:
+    with open("mystorage.txt", "w") as f:
         print(Data, file=f)
     imgdefault = cv2.imread(Data["PhotoPath"])
     img = imutils.resize(image=imgdefault, height=200)
